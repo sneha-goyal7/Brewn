@@ -5,10 +5,8 @@
 > enjoyable.
 
 🌐 **Live Demo:**  
-https://sneha-goyal7.github.io/Brewn/
 
 📦 **Repository:**  
-https://github.com/sneha-goyal7/Brewn
 
 ---
 
@@ -215,6 +213,7 @@ The project includes several front-end optimization techniques.
 
 | Technology | Purpose |
 |------------|---------|
+
 | HTML5 | Page structure and semantic markup |
 | CSS3 | Styling, layout and responsive design |
 | JavaScript | Interactions and application logic |
