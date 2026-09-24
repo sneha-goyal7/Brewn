@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Brewn | Coffee, Pastries & Fresh Meals</title>
+    <meta
+      name="description"
+      content="Order fresh coffee, pastries, meals, snacks and seasonal specials from Brew & Bite Cafe. Customize your order and choose dine-in, takeaway or pickup."
+    />
+    <meta
+      name="keywords"
+      content="cafe, coffee, pastries, meals, snacks, online cafe ordering, Brew and Bite"
+    />
+    <meta name="author" content="Brewn" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#a86432" />
+
+    <meta property="og:title" content="Brewn" />
+    <meta
+      property="og:description"
+      content="Fresh coffee, delicious food and simple online ordering."
+    />
+    <meta property="og:type" content="website" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='80'%3E☕%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CafeOrCoffeeShop",
+        "name": "Brewn",
+        "description": "Cafe serving coffee, pastries, meals, snacks and seasonal specials.",
+        "servesCuisine": ["Cafe", "Coffee", "Bakery", "Breakfast"],
+        "priceRange": "₹₹"
+      }
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">Skip to menu</a>
+
+    <header class="navbar">
+      <a href="#" class="logo" aria-label="Brewn">
+        <span class="logo-mark">☕</span>
+        <span>Brewn</span>
+      </a>
+
+      <div class="nav-search">
+        <label for="searchInput" class="sr-only">Search cafe menu</label>
+        <span aria-hidden="true">⌕</span>
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Search coffee, pastries, meals..."
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="nav-actions">
+        <button
+          class="icon-btn"
+          id="favoriteBtn"
+          type="button"
+          aria-label="View favorites"
+        >
+          ♡
+        </button>
+        <button
+          class="cart-btn"
+          id="cartOpenBtn"
+          type="button"
+          aria-label="Open cart"
+        >
+          🛒 <span>Cart</span> <b id="cartCount">0</b>
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <span class="eyebrow">Freshly made • Just for you</span>
+          <h1 id="heroTitle">
+            Good coffee.<br /><span>Good food.</span><br />Good moments.
+          </h1>
+          <p>
+            Explore handcrafted drinks, fresh pastries and satisfying meals.
+            Customize your order your way.
+          </p>
+          <div class="hero-actions">
+            <button class="primary-btn" type="button" onclick="scrollToMenu()">
+              Explore Menu
+            </button>
+            <button
+              class="secondary-btn"
+              type="button"
+              onclick="showCategory('Seasonal')"
+            >
+              View Seasonal
+            </button>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Today's cafe special">
+          <span>Today's pick</span>
+          <strong>Caramel Macchiato</strong>
+          <small>Espresso • steamed milk • caramel</small>
+          <b>₹190</b>
+        </div>
+      </section>
+
+      <section class="category-strip" aria-label="Menu categories">
+        <button class="category-btn active" data-category="All">All</button>
+        <button class="category-btn" data-category="Drinks">☕ Drinks</button>
+        <button class="category-btn" data-category="Pastries">
+          🥐 Pastries
+        </button>
+        <button class="category-btn" data-category="Meals">🍽️ Meals</button>
+        <button class="category-btn" data-category="Snacks">🍪 Snacks</button>
+        <button class="category-btn" data-category="Seasonal">
+          ✨ Seasonal
+        </button>
+      </section>
+
+      <section class="menu-section" id="menu" aria-labelledby="menuTitle">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Our menu</span>
+            <h2 id="menuTitle">Made to order</h2>
+          </div>
+          <div class="filters" aria-label="Dietary filters">
+            <button class="filter-btn active" data-filter="All">All</button>
+            <button class="filter-btn" data-filter="Vegetarian">
+              Vegetarian
+            </button>
+            <button class="filter-btn" data-filter="Vegan">Vegan</button>
+            <button class="filter-btn" data-filter="Dairy-Free">
+              Dairy-Free
+            </button>
+            <button class="filter-btn" data-filter="Under 300 cal">
+              Under 300 cal
+            </button>
+          </div>
+        </div>
+
+        <div id="menuGrid" class="menu-grid"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <div>🔎</div>
+          <h3>No matching items</h3>
+          <p>Try another search, category or filter.</p>
+          <button class="secondary-btn" type="button" onclick="resetFilters()">
+            Show all items
+          </button>
+        </div>
+      </section>
+      <!-- ==========================================
+     BREWN - CUSTOMER ACCOUNT
+     ========================================== -->
+
+      <section id="auth-section" class="account-page">
+        <!-- ==============================
+         LOGIN / SIGNUP CARD
+         ============================== -->
+
+        <div id="auth-view" class="auth-view">
+          <div class="auth-card">
+            <div class="brand-icon">☕</div>
+
+            <h2>Welcome to Brewn</h2>
+
+            <p class="auth-subtitle" id="auth-message">
+              Login or create your cafe account.
+            </p>
+
+            <form id="auth-form">
+              <!-- Full Name -->
+              <div id="full-name-group" class="form-group">
+                <label for="auth-full-name"> Full Name </label>
+
+                <input
+                  type="text"
+                  id="auth-full-name"
+                  placeholder="Enter your full name"
+                  autocomplete="name"
+                />
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label for="auth-email"> Email Address </label>
+
+                <input
+                  type="email"
+                  id="auth-email"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <label for="auth-password"> Password </label>
+
+                <input
+                  type="password"
+                  id="auth-password"
+                  placeholder="Enter your password"
+                  minlength="6"
+                  autocomplete="current-password"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                id="auth-submit"
+                class="primary-account-btn"
+              >
+                Create Account
+              </button>
+            </form>
+
+            <button type="button" id="auth-toggle" class="auth-toggle">
+              Already have an account? Login
+            </button>
+          </div>
+        </div>
+
+        <!-- ==============================
+         CUSTOMER ACCOUNT DASHBOARD
+         ============================== -->
+
+        <div id="account-view" class="account-view" hidden>
+          <div class="account-container">
+
+            <!-- ==========================
+                 PROFILE HERO
+                 ========================== -->
+
+            <div class="profile-hero">
+              <div id="profile-avatar" class="profile-avatar">P</div>
+
+              <div class="profile-hero-info">
+                <span class="profile-welcome"> Welcome back 👋 </span>
+
+                <h2 id="account-name">Customer</h2>
+
+                <p id="account-email">customer@email.com</p>
+
+                <span class="customer-badge"> ☕ Brewn </span>
+              </div>
+
+              <button
+                type="button"
+                id="edit-profile-button"
+                class="edit-profile-btn"
+              >
+                ✏️ Edit Profile
+              </button>
+            </div>
+
+            <!-- ==========================
+                 ACCOUNT STATS
+                 ========================== -->
+
+            <div class="account-stats">
+              <div class="stat-card">
+                <div class="stat-icon">🛒</div>
+
+                <div>
+                  <strong id="orders-count"> 0 </strong>
+
+                  <span> Orders </span>
+                </div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-icon">❤️</div>
+
+                <div>
+                  <strong id="favorites-count"> 0 </strong>
+
+                  <span> Favorites </span>
+                </div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+
+                <div>
+                  <strong id="reviews-count"> 0 </strong>
+
+                  <span> Reviews </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==========================
+                 PERSONAL INFORMATION
+                 ========================== -->
+
+            <div class="account-card">
+              <div class="account-card-header">
+                <div>
+                  <span class="section-kicker"> ACCOUNT </span>
+
+                  <h3>Personal Information</h3>
+                </div>
+
+                <span class="verified-badge"> ✓ Account </span>
+              </div>
+
+              <div class="profile-details-grid">
+                <div class="profile-detail">
+                  <span> Full Name </span>
+
+                  <strong id="display-full-name"> — </strong>
+                </div>
+
+                <div class="profile-detail">
+                  <span> Email Address </span>
+
+                  <strong id="display-email"> — </strong>
+                </div>
+
+                <div class="profile-detail">
+                  <span> Phone Number </span>
+
+                  <strong id="display-phone"> Not added </strong>
+                </div>
+
+                <div class="profile-detail">
+                  <span> Account Type </span>
+
+                  <strong id="display-role"> Customer </strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==========================
+                 RECENT ORDERS
+                 ========================== -->
+
+            <div class="account-card">
+              <div class="account-card-header">
+                <div>
+                  <span class="section-kicker"> ACTIVITY </span>
+
+                  <h3>Recent Orders 🛒</h3>
+                </div>
+              </div>
+
+              <div id="recent-orders" class="recent-orders">
+                <div class="empty-orders">
+                  <div>☕</div>
+
+                  <strong> No orders yet </strong>
+
+                  <p>Your delicious Brewn orders will appear here.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==========================
+                 QUICK ACTIONS
+                 ========================== -->
+
+            <div class="account-card">
+              <div class="account-card-header">
+                <div>
+                  <span class="section-kicker"> QUICK ACCESS </span>
+
+                  <h3>My Cafe</h3>
+                </div>
+              </div>
+
+              <div class="account-actions">
+                <button
+                  type="button"
+                  class="account-action"
+                  id="account-orders-btn"
+                >
+                  <span>🛒</span>
+
+                  <div>
+                    <strong>My Orders</strong>
+                    <small>View your order history</small>
+                  </div>
+
+                  <b>→</b>
+                </button>
+
+                <button
+                  type="button"
+                  class="account-action"
+                  id="account-favorites-btn"
+                >
+                  <span>❤️</span>
+
+                  <div>
+                    <strong>Favorites</strong>
+                    <small>Your saved cafe items</small>
+                  </div>
+
+                  <b>→</b>
+                </button>
+
+                <button
+                  type="button"
+                  class="account-action"
+                  id="account-reviews-btn"
+                >
+                  <span>⭐</span>
+
+                  <div>
+                    <strong>My Reviews</strong>
+                    <small>Manage your reviews</small>
+                  </div>
+
+                  <b>→</b>
+                </button>
+              </div>
+            </div>
+
+            <!-- ==========================
+                 LOGOUT
+                 ========================== -->
+
+            <button type="button" id="logout-button" class="logout-account-btn">
+              🚪 Logout
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+     EDIT PROFILE MODAL
+     ========================================== -->
+
+      <div id="profile-modal" class="profile-modal" hidden>
+        <div class="profile-modal-overlay"></div>
+
+        <div
+          class="profile-modal-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="profile-modal-title"
+        >
+          <button
+            type="button"
+            id="close-profile-modal"
+            class="modal-close"
+            aria-label="Close"
+          >
+            ×
+          </button>
+
+          <div class="modal-avatar">👤</div>
+
+          <h3 id="profile-modal-title">Edit Your Profile</h3>
+
+          <p>Keep your Brewn account information up to date.</p>
+
+          <form id="profile-form">
+            <div class="form-group">
+              <label for="profile-name"> Full Name </label>
+
+              <input
+                type="text"
+                id="profile-name"
+                placeholder="Your full name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="profile-phone"> Phone Number </label>
+
+              <input
+                type="tel"
+                id="profile-phone"
+                placeholder="Your phone number"
+              />
+            </div>
+
+            <div class="form-group">
+              <label> Email Address </label>
+
+              <input type="email" id="profile-email" readonly />
+
+              <small> Email is managed by your login account. </small>
+            </div>
+
+            <button type="submit" id="profile-save" class="primary-account-btn">
+              Save Changes
+            </button>
+
+            <p
+              id="profile-message"
+              class="profile-message"
+              aria-live="polite"
+            ></p>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <h2>☕ Brewn</h2>
+          <p>Fresh coffee, delicious food and good moments.</p>
+        </div>
+        <div>
+          <h3>Menu</h3>
+          <a href="#menu" onclick="showCategory('Drinks')">Drinks</a>
+          <a href="#menu" onclick="showCategory('Pastries')">Pastries</a>
+          <a href="#menu" onclick="showCategory('Meals')">Meals</a>
+          <a href="#menu" onclick="showCategory('Seasonal')">Seasonal</a>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <p>📍 Ghaziabad , Uttar Pradesh</p>
+          <p>📞 +91 8923274295</p>
+          <p>✉️ hello@brewn.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 Brewn Cafe. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Product customization modal -->
+
+    <div class="modal-backdrop" id="productModal" hidden>
+      <section
+        class="product-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalName"
+      >
+        <button
+          class="modal-close"
+          id="modalCloseBtn"
+          type="button"
+          aria-label="Close product details"
+        >
+          ×
+        </button>
+        <div class="modal-image-wrap">
+          <img id="modalImage" src="" alt="" />
+        </div>
+        <div class="modal-content">
+          <span id="modalCategory" class="small-label"></span>
+          <h2 id="modalName"></h2>
+          <p id="modalDescription"></p>
+          <div class="modal-price">₹<span id="modalPrice"></span></div>
+          <div id="customizationOptions"></div>
+
+          <div class="quantity-row">
+            <h3>Quantity</h3>
+            <div class="quantity">
+              <button
+                type="button"
+                onclick="changeQuantity(-1)"
+                aria-label="Decrease quantity"
+              >
+                −
+              </button>
+              <span id="quantity">1</span>
+              <button
+                type="button"
+                onclick="changeQuantity(1)"
+                aria-label="Increase quantity"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <label class="instructions-label" for="specialInstructions"
+            >Special instructions</label
+          >
+          <input
+            id="specialInstructions"
+            class="instructions"
+            maxlength="100"
+            type="text"
+            placeholder="Optional — e.g. less spicy"
+          />
+
+          <button class="add-cart-btn" id="addCartBtn" type="button">
+            Add to Cart · ₹<span id="livePrice">0</span>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Cart drawer -->
+
+    <div class="drawer-backdrop" id="cartDrawer" hidden>
+      <aside class="cart-drawer" aria-label="Shopping cart">
+        <div class="drawer-header">
+          <div>
+            <span class="eyebrow">Your order</span>
+            <h2>Cart</h2>
+          </div>
+          <button
+            class="modal-close"
+            id="cartCloseBtn"
+            type="button"
+            aria-label="Close cart"
+          >
+            ×
+          </button>
+        </div>
+        <div id="cartItems" class="cart-items"></div>
+        <div class="cart-footer">
+          <div class="summary-row">
+            <span>Subtotal</span><b>₹<span id="subtotal">0</span></b>
+          </div>
+          <div class="summary-row">
+            <span>Tax (5%)</span><span>₹<span id="tax">0</span></span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span><b>₹<span id="total">0</span></b>
+          </div>
+          <div class="order-type">
+            <button class="order-type-btn active" data-order-type="Dine-in">
+              Dine-in
+            </button>
+            <button class="order-type-btn" data-order-type="Takeout">
+              Takeout
+            </button>
+            <button class="order-type-btn" data-order-type="Pickup">
+              Pickup
+            </button>
+          </div>
+          <button class="primary-btn full-width" id="checkoutBtn" type="button">
+            Place Order
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js" defer></script>
+
+    <!-- Supabase JavaScript Library -->
+     
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+    <script src="script.js"></script>
+
+    <script src="auth.js"></script>
+  </body>
+</html>
