@@ -5,6 +5,7 @@
 > enjoyable.
 
 🌐 **Live Demo:**  
+https://brewncafe.netlify.app/
 
 📦 **Repository:**  
 https://github.com/sneha-goyal7/Brewn
