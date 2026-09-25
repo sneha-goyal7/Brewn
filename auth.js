@@ -750,4 +750,4 @@ updateAuthMode();
 
 checkExistingUser();
 
-console.log("☕ Brew & Bite Account System Loaded");
+console.log("☕ Brewn Account System Loaded");
