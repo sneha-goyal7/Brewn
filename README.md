@@ -215,11 +215,11 @@ The project includes several front-end optimization techniques.
 | Technology | Purpose |
 |------------|---------|
 
-| HTML5 | Page structure and semantic markup |
-| CSS3 | Styling, layout and responsive design |
-| JavaScript | Interactions and application logic |
-| Git | Version control |
-| GitHub | Source code hosting |
+| HTML5        | Page structure and semantic markup |
+| CSS3         | Styling, layout and responsive design |
+| JavaScript   | Interactions and application logic |
+| Git          | Version control |
+| GitHub       | Source code hosting |
 | GitHub Pages | Website deployment |
 
 ---
